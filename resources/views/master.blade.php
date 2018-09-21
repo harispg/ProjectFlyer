@@ -52,7 +52,7 @@
       </div>
     </nav>
 
-    <main role="main" class="container">
+    <main role="main" class="container-fluid">
 
       @yield('content')
 

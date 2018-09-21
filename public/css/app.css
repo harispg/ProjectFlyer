@@ -1834,7 +1834,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
   }
 }
 
-img {
-  width: 50px;
+.gallery__image {
+  margin-bottom: 1em;
 }
 

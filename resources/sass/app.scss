@@ -1167,6 +1167,7 @@ body.swal2-no-backdrop .swal2-shown {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg); } }
 
-img {
-  width: 50px;
+.gallery__image
+{
+  margin-bottom: 1em;
 }
