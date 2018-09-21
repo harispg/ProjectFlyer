@@ -9,21 +9,19 @@
       </div>
     </div>
 
-  <div class="col-md-8 gallery">
-    @foreach($flyer->photos->chunk(4) as $set)
-      <div class="row">
-        @foreach ($set as $photo)
-          <div class="col-md-3 gallery__image">
-            <img src="/{{ $photo->thumbnail_path}}" alt="">
-          </div>
-        @endforeach
-      </div>
-    @endforeach
-
+    <div class="col-md-8 gallery">
+      @foreach($flyer->photos->chunk(4) as $set)
+        <div class="row">
+          @foreach ($set as $photo)
+            <div class="col-md-3 gallery__image">
+              <img src="/{{ $photo->thumbnail_path}}" alt="">
+            </div>
+          @endforeach
+        </div>
+      @endforeach
+    </div>
   </div>
 
-  </div>
-<hr>
  <form id="formToAddPhotos" class="dropzone" action="/{{$flyer->zip}}/{{$flyer->street}}/photos" method="post">
    {{ csrf_field() }}
  </form>
