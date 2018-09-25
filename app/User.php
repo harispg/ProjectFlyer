@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Flyer;
-use App\Http\Requests\FlyerRequest;
+// use App\Http\Requests\FlyerRequest;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,8 +41,8 @@ class User extends Authenticatable
     }
 
 
-    public function createFlyer(FlyerRequest $request)
+    public function createFlyer(Flyer $flyer)
     {
-      return $this->flyers()->create($request->all());
+      return $this->flyers()->save($flyer);
     }
 }

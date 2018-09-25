@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Flyer;
-use App\Flyer_Photo;
 use Illuminate\Http\Request;
 use App\Http\Requests\FlyerRequest;
-use App\Http\Requests\AddPhotoRequest;
 //use App\Http\Controllers\Traits\AuthorizesUsers;
 
 
@@ -48,10 +46,12 @@ class FlyersController extends Controller
      */
     public function store(FlyerRequest $request)
     {
-        auth()->user()->createFlyer($request);
+        $flyer = auth()->user()->createFlyer(
+          new Flyer($request->all())
+        );
         // Flyer::create($request->all());
         flash()->success('Success', 'Your flyer has been saved');
-        return redirect()->back();
+        return redirect(flyer_path($flyer));
 
     }
 
@@ -65,12 +65,6 @@ class FlyersController extends Controller
     {
         $flyer = Flyer::locatedAt($zip, $street);
         return view('pages.show', compact('flyer'));
-    }
-
-    public function addPhoto($zip, $street, AddPhotoRequest $request)
-    {
-      $photo = Flyer_Photo::fromFile($request->file('photo'));
-      Flyer::locatedAt($zip, $street)->addPhoto($photo);
     }
     /**
      * Show the form for editing the specified resource.

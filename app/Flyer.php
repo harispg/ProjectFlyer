@@ -17,7 +17,7 @@ class Flyer extends Model
 
   public function addPhoto($photo)
   {
-    $this->photos()->save($photo);
+    return $this->photos()->save($photo);
   }
 
   public function getPriceAttribute($price)
