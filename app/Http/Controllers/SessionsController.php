@@ -9,6 +9,7 @@ class SessionsController extends Controller
     public function __construct()
     {
       $this->middleware('guest')->except('destroy');
+      parent::__construct();
     }
     public function create()
     {
@@ -28,7 +29,7 @@ class SessionsController extends Controller
           'message' => 'Please check your credentials and try again'
         ]);
       }
-
+      flash()->success('Loged in', 'Do what you want');
       return redirect('/');
     }
 

@@ -10,29 +10,58 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flyer_Photo extends Model
 {
-    protected $fillable= ['name', 'path', 'thumbnail_path'];
-    protected $baseDir = 'Images/FlyerPhotos';
+    protected $fillable = ['name', 'path', 'thumbnail_path'];
+    protected $file;
+
+    protected static function boot()
+    {
+      parent::boot();
+      static::creating(function ($photo) {
+        return $photo->upload();
+      });
+    }
 
     public function flyer()
     {
       return $this->belongsTo(Flyer::class);
     }
 
-    public static function named($name)
+    public static function fromFile(UploadedFile $file)
     {
-      return (new static)->saveAs($name);
-    }
-    public function saveAs($name)
-    {
-      $this->name = sprintf("%s-%s", time(), $name);
-      $this->path = sprintf("%s/%s", $this->baseDir, $this->name);
-      $this->thumbnail_path = sprintf("%s/tn-%s", $this->baseDir, $this->name);
-      return $this;
+      $photo = new static;
+      $photo->file = $file;
+
+      return $photo->fill([
+        'name' => $photo->fileName(),
+        'path' => $photo->filePath(),
+        'thumbnail_path' => $photo->thumbnailPath()
+      ]);
     }
 
-    public function move(UploadedFile $file)
+    public function fileName()
     {
-      $file->move($this->baseDir, $this->name);
+      $name = sha1(time() . $this->file->getClientOriginalName());
+      $extension = $this->file->getClientOriginalExtension();
+      return "{$name}.{$extension}";
+    }
+
+    public function filePath()
+    {
+      return $this->baseDir().'/'.$this->fileName();
+    }
+    public function thumbnailPath()
+    {
+      return $this->baseDir().'/tn-'.$this->fileName();
+    }
+    public function baseDir()
+    {
+      return 'Images/flyer';
+    }
+
+
+    public function upload()
+    {
+      $this->file->move($this->baseDir(), $this->fileName());
 
       $this->makeThumbnail();
 
@@ -42,10 +71,9 @@ class Flyer_Photo extends Model
 
     public function makeThumbnail()
     {
-      Image::make($this->path)
+      Image::make($this->filePath())
       ->fit(200)
-      ->save($this->thumbnail_path);
+      ->save($this->thumbnailPath());
     }
-
 
 }

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Flyer;
+use App\Http\Requests\FlyerRequest;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -27,4 +29,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function flyers()
+    {
+      return $this->hasMany(Flyer::class);
+    }
+
+    public function owns($model)
+    {
+      return $model->user_id == $this->id;
+    }
+
+
+    public function createFlyer(FlyerRequest $request)
+    {
+      return $this->flyers()->create($request->all());
+    }
 }

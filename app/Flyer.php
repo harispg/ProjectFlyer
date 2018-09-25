@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use App\Flyer_Photo;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,15 @@ class Flyer extends Model
   public function photos()
   {
     return $this->hasMany(Flyer_Photo::class);
+  }
+
+  public function owner()
+  {
+    return $this->belongsTo(User::class, 'user_id');
+  }
+
+  public function ownedBy(User $user)
+  {
+    return $this->user_id == $user->id;
   }
 }

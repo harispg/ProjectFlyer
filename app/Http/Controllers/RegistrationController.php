@@ -7,6 +7,10 @@ use App\User;
 
 class RegistrationController extends Controller
 {
+  public function __construct()
+  {
+    parent::__construct();
+  }
     public function create()
     {
       return view('pages.register');

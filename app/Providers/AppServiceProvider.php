@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('flyers.form', function($view){
           $view->with('countries', \App\Http\Utilities\Countries::all());
         });
+
     }
 
     /**
