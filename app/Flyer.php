@@ -24,6 +24,7 @@ class Flyer extends Model
   {
     return '$'. number_format($price);
   }
+  
   public function photos()
   {
     return $this->hasMany(Flyer_Photo::class);
