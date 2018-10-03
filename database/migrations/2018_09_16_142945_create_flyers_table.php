@@ -17,7 +17,7 @@ class CreateFlyersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('city', 40);
-            $table->string('street');
+            $table->string('street', 100);
             $table->string('zip', 10);
             $table->string('country', 40);
             $table->string('state', 40);

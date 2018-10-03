@@ -45,7 +45,7 @@
   <script src="/js/lity.min.js"></script>
   <script type="text/javascript">
     Dropzone.options.formToAddPhotos = {
-      paramName: "photo",
+      paramName: 'photo',
       maxFilesize: 3,
       acceptedFiles: '.jpg, .jpeg, .npg, .bmp'
     }
