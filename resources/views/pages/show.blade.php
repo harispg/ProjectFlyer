@@ -22,8 +22,10 @@
                 <button type="submit">Delete</button>
 
               </form> --}}
+              @if ($user && $user->owns($flyer))
 
               {!! link_to('Delete', "/photos/{$photo->id}", 'DELETE') !!}
+              @endif
 
               <a href="/{{$photo->path}}"  data-lity>
                 <img src="/{{ $photo->thumbnail_path}}" >

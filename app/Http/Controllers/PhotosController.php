@@ -9,6 +9,11 @@ use App\Http\Requests\AddPhotoRequest;
 
 class PhotosController extends Controller
 {
+
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
     public function store($zip, $street, AddPhotoRequest $request)
     {
       $flyer = Flyer::locatedAt($zip, $street);
