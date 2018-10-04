@@ -23,6 +23,7 @@ class Flyer_Photo extends Model
       $this->attributes['name'] = $name;
       
       $this->path = $this->baseDir().'/'.$name;
+
       $this->thumbnail_path = $this->baseDir().'/tn-'.$name;
     }
 

@@ -14,11 +14,11 @@ class AddPhotoRequest extends FormRequest
      */
     public function authorize()
     {
-      return Flyer::where([
+      return true; /*Flyer::where([
         'zip' => $this->zip,
         'street' => $this->street,
         'user_id' => auth()->id(),
-      ])->exists();
+      ])->exists();*/
     }
 
     /**
@@ -29,7 +29,7 @@ class AddPhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+            /*'photo' => 'required|mimes:jpg,jpeg,png,bmp'*/
         ];
     }
 }
