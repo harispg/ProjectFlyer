@@ -27,14 +27,14 @@
     <ul class="navbar-nav">
       @if($signedIn)
         <li>
-          <a class="nav-link mr-sm-2">Welcome {{$user->name}}</a>
+          <a class="nav-link mr-sm-2">{{$user->name}}</a>
         </li>
         <li>
-          <a class="nav-link mr-sm-2" href="/logout">Logout</a>
+          <a class="nav-link mr-sm-2" href="{{route('logout')}}">Logout</a>
         </li>
       @else
         <li class="nav-item">
-          <a href="/login" class="nav-link mr-sm-2">Login</a>
+          <a href="{{route('login')}}" class="nav-link mr-sm-2">Login</a>
         </li>
         <li class="nav-item">
           <a href="/register" class="nav-link mr-sm-2">Register</a>

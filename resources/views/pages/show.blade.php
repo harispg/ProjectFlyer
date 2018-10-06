@@ -36,7 +36,7 @@
       @endforeach
       @if ($user && $user->owns($flyer))
          <hr>
-         <form id="formToAddPhotos" class="dropzone" action="/{{$flyer->zip}}/{{$flyer->street}}/photos" method="post">
+         <form id="formToAddPhotos" class="dropzone" action="{{route('addPhotos', ['zip'=>$flyer->zip, 'street'=>$flyer->street])}}" method="post">
            {{ csrf_field() }}
          </form>
       @endif
@@ -49,7 +49,7 @@
     Dropzone.options.formToAddPhotos = {
       paramName: 'photo',
       maxFilesize: 3,
-      acceptedFiles: '.jpg, .jpeg, .npg, .bmp'
+      acceptedFiles: '.jpg, .jpeg, .png, .bmp'
     }
   </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Flyer;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,6 +20,9 @@ class Controller extends BaseController
       view()->composer('pages.show', function($view){
         $view->with('signedIn', auth()->check());
         $view->with('user', auth()->user());
+      });
+      view()->composer('pages.home', function($view){
+        $view->with('flyers', Flyer::all());
       });
     }
 }

@@ -9,6 +9,12 @@
   <p class="lead">
   <a class="btn btn-primary btn-lg" href="flyers/create" role="button">Create a Flyer</a>
   </p>
-</div>
+	</div>
+	  <div class="blog-post">
+	    @foreach($flyers as $flyer)
+	    <h2 class="blog-post-title"><a href="/{{$flyer->zip}}/{{$flyer->street}}">{{$flyer->street}}</a></h2>
+	      {{$flyer->description}}
+	    @endforeach
+	 </div>
 
 @endsection
